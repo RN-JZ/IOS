@@ -10,27 +10,29 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    var window: UIWindow? // The window is container that holds all visual element of our app
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool
+    {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        window?.backgroundColor = .systemBackground
+        window?.rootViewController = LoginViewController()
+    
         return true
+        
     }
-
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-
 
 }
+
+
+//When we create an iOS app, we want to display something on the screen for the user to see. The main container that holds all the visual elements of our app is called the window.
+
+//
+//In order to display something in the window, we need to add a view controller to it. The view controller contains the code that specifies what should be displayed on the screen.
+//
+//When we set the root view controller of the window in the app delegate, we are telling the app which view controller should be displayed in the window. However, if we don't specify what the view controller should display, the default view is a transparent background.
+//
+//So, when we see the window after setting the root view controller, it's because there is a transparent view on top of it. This allows us to see through the app's window and view what is behind it, such as the home screen or another app.
+//
+//To make the app display something visible, we need to add elements to the view controller's view, such as buttons, labels, or images. Then, when the app is run, the view controller's view will be displayed in the window, and we'll be able to see it instead of the transparent background.
 
