@@ -61,6 +61,7 @@ extension LoginViewController
         bankey.numberOfLines = 0
         bankey.textColor = .black
         bankey.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        bankey.adjustsFontForContentSizeCategory = true
         bankey.textAlignment = .center
        
         
@@ -69,6 +70,7 @@ extension LoginViewController
         discription.font = UIFont.preferredFont(forTextStyle: .title3)
         discription.textAlignment = .center
         discription.numberOfLines = 0
+        discription.adjustsFontForContentSizeCategory = true
        
         
         
