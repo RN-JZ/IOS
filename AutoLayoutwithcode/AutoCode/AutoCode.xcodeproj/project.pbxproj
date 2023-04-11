@@ -13,6 +13,10 @@
 		2A5E1D8729E52A2B00823544 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A5E1D8529E52A2B00823544 /* Main.storyboard */; };
 		2A5E1D8929E52A3000823544 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A5E1D8829E52A3000823544 /* Assets.xcassets */; };
 		2A5E1D8C29E52A3000823544 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A5E1D8A29E52A3000823544 /* LaunchScreen.storyboard */; };
+		2A5E1D9729E583F700823544 /* Challenge1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E1D9629E583F700823544 /* Challenge1ViewController.swift */; };
+		2A5E1D9929E5841D00823544 /* NestedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E1D9829E5841D00823544 /* NestedView.swift */; };
+		2A5E1D9C29E58CA300823544 /* Sibling View Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E1D9B29E58CA300823544 /* Sibling View Layout.swift */; };
+		2A5E1D9F29E5A5EA00823544 /* Proportional Centering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E1D9E29E5A5EA00823544 /* Proportional Centering.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		2A5E1D8829E52A3000823544 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A5E1D8B29E52A3000823544 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A5E1D8D29E52A3000823544 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A5E1D9629E583F700823544 /* Challenge1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge1ViewController.swift; sourceTree = "<group>"; };
+		2A5E1D9829E5841D00823544 /* NestedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedView.swift; sourceTree = "<group>"; };
+		2A5E1D9B29E58CA300823544 /* Sibling View Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sibling View Layout.swift"; sourceTree = "<group>"; };
+		2A5E1D9E29E5A5EA00823544 /* Proportional Centering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Proportional Centering.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,43 @@
 		2A5E1D7E29E52A2B00823544 /* AutoCode */ = {
 			isa = PBXGroup;
 			children = (
+				2A5E1D9D29E5A5A700823544 /* Challenge 4-3 */,
+				2A5E1D9A29E58C4600823544 /* Challenge 4-2 */,
 				2A5E1D7F29E52A2B00823544 /* AppDelegate.swift */,
 				2A5E1D8129E52A2B00823544 /* SceneDelegate.swift */,
 				2A5E1D8329E52A2B00823544 /* ViewController.swift */,
+				2A5E1D9529E583BF00823544 /* Challenge 4-1 */,
 				2A5E1D8529E52A2B00823544 /* Main.storyboard */,
 				2A5E1D8829E52A3000823544 /* Assets.xcassets */,
 				2A5E1D8A29E52A3000823544 /* LaunchScreen.storyboard */,
 				2A5E1D8D29E52A3000823544 /* Info.plist */,
 			);
 			path = AutoCode;
+			sourceTree = "<group>";
+		};
+		2A5E1D9529E583BF00823544 /* Challenge 4-1 */ = {
+			isa = PBXGroup;
+			children = (
+				2A5E1D9629E583F700823544 /* Challenge1ViewController.swift */,
+				2A5E1D9829E5841D00823544 /* NestedView.swift */,
+			);
+			path = "Challenge 4-1";
+			sourceTree = "<group>";
+		};
+		2A5E1D9A29E58C4600823544 /* Challenge 4-2 */ = {
+			isa = PBXGroup;
+			children = (
+				2A5E1D9B29E58CA300823544 /* Sibling View Layout.swift */,
+			);
+			path = "Challenge 4-2";
+			sourceTree = "<group>";
+		};
+		2A5E1D9D29E5A5A700823544 /* Challenge 4-3 */ = {
+			isa = PBXGroup;
+			children = (
+				2A5E1D9E29E5A5EA00823544 /* Proportional Centering.swift */,
+			);
+			path = "Challenge 4-3";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +174,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A5E1D9F29E5A5EA00823544 /* Proportional Centering.swift in Sources */,
+				2A5E1D9729E583F700823544 /* Challenge1ViewController.swift in Sources */,
+				2A5E1D9929E5841D00823544 /* NestedView.swift in Sources */,
 				2A5E1D8429E52A2B00823544 /* ViewController.swift in Sources */,
+				2A5E1D9C29E58CA300823544 /* Sibling View Layout.swift in Sources */,
 				2A5E1D8029E52A2B00823544 /* AppDelegate.swift in Sources */,
 				2A5E1D8229E52A2B00823544 /* SceneDelegate.swift in Sources */,
 			);
