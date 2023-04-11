@@ -15,6 +15,8 @@ class OnboardinViewController:UIViewController
    
     let label = UILabel()
     let imageView = UIImageView()
+    var text = String()
+    var image = String()
     private lazy var stackView:UIStackView =
     {
         let stack = UIStackView(arrangedSubviews: [imageView , label])
@@ -24,6 +26,17 @@ class OnboardinViewController:UIViewController
         return stack
     }()
     
+    
+    init(heroImageName:String , titleText:String)
+    {
+        self.text = titleText
+        self.image = heroImageName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         style()
@@ -38,14 +51,14 @@ extension OnboardinViewController
     {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.image  = UIImage(named: "delorean")
+        imageView.image  = UIImage(named: image)
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
-        label.text = "Bankey is faster to use and has a brans new look and feel taht will make you fell like you are in 1989"
+        label.text = text
         
         
         
@@ -53,7 +66,7 @@ extension OnboardinViewController
     }
     func layout()
     {
-        
+        view.backgroundColor = .systemBackground
         view.addSubview(stackView)
         
         
