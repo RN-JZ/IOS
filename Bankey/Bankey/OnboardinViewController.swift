@@ -14,6 +14,7 @@ class OnboardinViewController:UIViewController
     
    
     let label = UILabel()
+    
     let imageView = UIImageView()
     var text = String()
     var image = String()
@@ -63,11 +64,16 @@ extension OnboardinViewController
         
         
         
+        
+        
+        
+        
     }
     func layout()
     {
         view.backgroundColor = .systemBackground
         view.addSubview(stackView)
+      
         
         
         NSLayoutConstraint.activate([
@@ -75,7 +81,9 @@ extension OnboardinViewController
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: stackView.trailingAnchor, multiplier: 1)
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: stackView.trailingAnchor, multiplier: 1),
+            
+            
             
             
         ])

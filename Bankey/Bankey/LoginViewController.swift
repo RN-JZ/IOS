@@ -7,7 +7,10 @@
 
 import UIKit
 
-
+protocol LoginViewControllerDelegate:class
+{
+    func didLogin()
+}
 
 
 class LoginViewController: UIViewController {
@@ -16,6 +19,7 @@ class LoginViewController: UIViewController {
     let login = LoginView()
     let signButton = UIButton(type: .system)
     let errorMessage = UILabel()
+    weak var delegate:LoginViewControllerDelegate? // what is weak var
     var userName:String?
     {
         return login.userNameTextField.text
@@ -157,9 +161,10 @@ extension LoginViewController
         {
             configurationView(withMessage: "UserName/ Password should not be nil")
         }
-        else if user == "JZ" && password == "abc"
+        else if user == "jz" && password == "abc"
         {
             signButton.configuration?.showsActivityIndicator = true
+            delegate?.didLogin()
         }
         else
         {
