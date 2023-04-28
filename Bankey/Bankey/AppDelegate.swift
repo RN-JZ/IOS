@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow? // The window is container that holds all visual element of our app
     let loginViewContoller = LoginViewController()
     let onboardingScreen = OnboardingContainerViewController()
+    let mainViewController = MainViewController()
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool
     {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -20,9 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .systemBackground
         loginViewContoller.delegate = self
         onboardingScreen.delgate = self
-        var value = LocalState.hasLogin
-        window?.rootViewController = value ? ViewController() :loginViewContoller
-    
+        // this code is for if user is already login then use use NS USER DEFAULT
+        // THIS WAS NOT IN COURSE
+//        var value = LocalState.hasLogin
+//        window?.rootViewController = value ? ViewController() :loginViewContoller
+        
+        
+        window?.rootViewController = mainViewController
         return true
         
     }
