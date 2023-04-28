@@ -160,8 +160,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "didLogin()"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -177,7 +177,7 @@
             startingLineNumber = "36"
             endingLineNumber = "36"
             landmarkName = "didLogin()"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -193,7 +193,7 @@
             startingLineNumber = "38"
             endingLineNumber = "38"
             landmarkName = "didLogin()"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -209,7 +209,7 @@
             startingLineNumber = "42"
             endingLineNumber = "42"
             landmarkName = "didLogin()"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -225,7 +225,7 @@
             startingLineNumber = "41"
             endingLineNumber = "41"
             landmarkName = "didLogin()"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -241,7 +241,7 @@
             startingLineNumber = "40"
             endingLineNumber = "40"
             landmarkName = "didLogin()"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -257,7 +257,7 @@
             startingLineNumber = "39"
             endingLineNumber = "39"
             landmarkName = "didLogin()"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -273,7 +273,7 @@
             startingLineNumber = "37"
             endingLineNumber = "37"
             landmarkName = "didLogin()"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
