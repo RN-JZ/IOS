@@ -239,7 +239,7 @@ class Unicycle:Vehicle
 protocol Account {
  var value: Double { get set }
  init(initialAmount: Double)
- init?(transferAccount: Account)
+ init?(transferAccount: Account)  // FAILABLE INTILIZER
 }
 //In the Account protocol above, you define two initializers as part of the protocol.
 //This behaves much as you might expect, in that any type that conforms to Account

@@ -61,6 +61,15 @@ extension ViewController
         let nc2 = UINavigationController(rootViewController: vc2)
         let nc3 = UINavigationController(rootViewController: vc3)
         
+      
+        //HIDE NAVIGATION BAR LINE
+//        let img = UIImage()
+//        nc1.navigationBar.shadowImage = img
+//        nc1.navigationBar.setBackgroundImage(img, for: .default)
+//     nc1.navigationBar.isTranslucent = false
+//
+        
+        
        
         
         
@@ -148,3 +157,6 @@ class FavouriteViewController:UIViewController
         // Do any additional setup after loading the view.
     }
 }
+
+
+

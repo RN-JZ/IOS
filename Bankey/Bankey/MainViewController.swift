@@ -33,9 +33,9 @@ extension MainViewController
         moreVc.setTabBarImage(imageName: "ellipsis.circle", title: "More")
         
         
-        let summaryNC = UINavigationController(rootViewController: summaryVC)
-        let moneyNC = UINavigationController(rootViewController: moneyVC)
-        let moreNc =  UINavigationController(rootViewController: moreVc)
+        let summaryNC =  UINavigationController(rootViewController: summaryVC)
+        let moneyNC   =  UINavigationController(rootViewController: moneyVC)
+        let moreNc    =  UINavigationController(rootViewController: moreVc)
         
         
        
