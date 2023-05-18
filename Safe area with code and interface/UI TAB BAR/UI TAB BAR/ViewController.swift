@@ -111,13 +111,13 @@ extension ViewController
         //IMP
         
         //  When presenting the UITabBarController modally using the present(_:animated:completion:) method, the view controller hierarchy is managed by the system automatically. Therefore, you do not need to add the tab bar controller's view as a subview of the current view controller's view.
-        tabBarController.modalPresentationStyle = .fullScreen
-        present(tabBarController, animated: true)
+//        tabBarController.modalPresentationStyle = .fullScreen
+//        present(tabBarController, animated: true)
         
         
         // the above line add it automatically
 //        addChild(tabBarController)
-//        view.addSubview(tabBarController.view)
+   view.addSubview(tabBarController.view)
 //        tabBarController.didMove(toParent: self)
         
     }
