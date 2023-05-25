@@ -7,7 +7,34 @@
 
 import UIKit
 
+let emailRegex  = "[A-Z0-9a-z.-_]+@[A-Z0-9a-z.-_].[A-Za-z]{2,3}"
+let passwordRegex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
 
+
+//MARK: - REGEX
+extension String
+{
+    func isEmailValid() -> Bool
+    {
+        return (self.range(of:emailRegex, options: .regularExpression) != nil)
+    }
+    
+    func isPassValid()->Bool
+    {
+        return (self.range(of:passwordRegex, options: .regularExpression) != nil)
+    }
+}
+extension UITextField
+{
+    func isEmail()->Bool
+    {
+        return self.text?.isEmailValid() ?? false
+    }
+    func isPassword()->Bool
+    {
+        return self.text?.isPassValid() ?? false
+    }
+}
 extension UIButton
 {
     func attributedTitle(firstPart:String , secondPart:String)

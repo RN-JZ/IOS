@@ -48,8 +48,6 @@ extension FeedViewController
         nc.tabBarItem.image = unselectedImage
         nc.tabBarItem.selectedImage = selectedImage
         nc.navigationBar.backgroundColor = .systemBackground
-
-
         return nc
 
 

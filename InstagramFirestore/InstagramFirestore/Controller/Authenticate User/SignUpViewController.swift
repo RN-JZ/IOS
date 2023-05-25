@@ -8,6 +8,7 @@ class SignUPViewcontroller:UIViewController {
     
     var stack:UIStackView = UIStackView()
     let gradient = CAGradientLayer()
+    var profileimage:UIImage?
     private var viewModel = Authentication()
   
  
@@ -62,8 +63,7 @@ class SignUPViewcontroller:UIViewController {
         LB.setHeight(50)
         LB.backgroundColor = .purple.withAlphaComponent(0.5)
         LB.isEnabled = false
-        
-       
+        LB.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         LB.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         return LB
         
@@ -126,22 +126,22 @@ class SignUPViewcontroller:UIViewController {
     {
         if sender == emailField
         {
-            print("foo - in email")
+           
             viewModel.email = sender.text
            
         }
         if sender == UserName
         {
-            print("foo - in userName")
+            
             viewModel.userName = sender.text
         }
         if sender == FullName
         {
-            print("foo - in FullName")
+            
             viewModel.FullName = sender.text
         }
         else{
-            print("foo - in Password")
+          
             viewModel.password = sender.text
         }
         
@@ -150,6 +150,45 @@ class SignUPViewcontroller:UIViewController {
             SignUpButton.isEnabled = true
             SignUpButton.backgroundColor = .blue
         }
+    }
+    
+    @objc func handleSignUp()
+    {
+        if(emailField.text!.isEmailValid())
+        {
+            print("foo - REGEX Match")
+            emailField.rightViewMode = .never
+           
+        }
+        else{
+            
+            let obj = emailField as! CustomTextField
+            obj.setError(value: "Email not according to standard", field: emailField)
+            return
+        }
+        
+        if(passwordField.text!.isPassValid())
+        {
+            print("foo - REGEX  Pass Match")
+            passwordField.rightViewMode = .never
+           
+        }
+        else{
+            
+            let obj = passwordField as! CustomTextField
+            obj.setError(value: "password conatain specila character nad more that 8 letter ", field: obj)
+            return
+        }
+        guard let profileimage = profileimage else {return}
+        AuthService.registerUser(withCredential: AuthCredentials(email: emailField.text!, password: passwordField.text!, fullName:FullName.text!, userName:UserName.text!, profileImage: profileimage)){ error in
+            if let error = error {
+                print("Failed to save user data: \(error.localizedDescription)")
+            } else {
+                print("User data saved successfully.")
+                // Handle successful registration here
+            }
+        }
+        
     }
     
     
@@ -225,14 +264,15 @@ extension SignUPViewcontroller:UIImagePickerControllerDelegate , UINavigationCon
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-            print("foo- in delegate")
+            
            // Handle the selected image here
            guard let image = info[.editedImage] as? UIImage else{
-               print("foo- FOUND NIL")
+              
                return
            }
         
             let originalImage = image.withRenderingMode(.alwaysOriginal)
+            profileimage = originalImage
             iconImageButton.layer.cornerRadius = iconImageButton.frame.size.width / 2
             iconImageButton.layer.masksToBounds = true
             iconImageButton.setImage(originalImage, for: .normal)
@@ -245,7 +285,7 @@ extension SignUPViewcontroller:UIImagePickerControllerDelegate , UINavigationCon
        }
 
        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-           print("foo- in Cancle")
+           
            picker.dismiss(animated: true, completion: nil)
        }
     
