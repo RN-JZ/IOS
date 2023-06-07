@@ -10,6 +10,7 @@ class SignUPViewcontroller:UIViewController {
     let gradient = CAGradientLayer()
     var profileimage:UIImage?
     private var viewModel = Authentication()
+    weak var delegate:AutheticationDelegate?
   
  
     private let backView:UIView = {
@@ -186,6 +187,9 @@ class SignUPViewcontroller:UIViewController {
             } else {
                 print("User data saved successfully.")
                 // Handle successful registration here
+                self.delegate?.authenticationComplete()
+                self.dismiss(animated: true, completion: nil)
+                
             }
         }
         

@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 
 private let reuseIdentifier = "cell"
@@ -15,6 +16,21 @@ class SearchViewController: UICollectionViewController
    
         
     }
+    //MARK: - API
+    @objc func handleLogout()
+    {
+        do{
+            print("DEBUG: in LOGOUT")
+            try Auth.auth().signOut()
+            let nav = UINavigationController(rootViewController: LoginUserViewController())
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav,animated: true , completion: nil)
+        }
+        catch
+        {
+            print("DEBUG: FAILED TO LOGOUT")
+        }
+    }
     
     // MARK: - HELPERS
     
@@ -27,6 +43,7 @@ class SearchViewController: UICollectionViewController
 //        }
         
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain , target: self, action: #selector(handleLogout))
     }
     
 }

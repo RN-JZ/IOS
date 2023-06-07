@@ -3,12 +3,18 @@
 
 import UIKit
 
+protocol AutheticationDelegate:class
+{
+    func authenticationComplete()
+}
+
 
 class LoginUserViewController:UIViewController {
     
     var stack:UIStackView = UIStackView()
     private var viewModel = loginViewModel()
     let gradient = CAGradientLayer()
+    weak var delegate:AutheticationDelegate?
     
     private let iconImage:UIImageView =
     {
@@ -16,6 +22,7 @@ class LoginUserViewController:UIViewController {
         insta.contentMode = .scaleAspectFill
         return insta
     }()
+    
     
     private let emailField:UITextField =
     {
@@ -46,6 +53,7 @@ class LoginUserViewController:UIViewController {
         LB.setHeight(50)
         LB.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         LB.isEnabled = false
+        LB.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return LB
         
     }()
@@ -66,6 +74,25 @@ class LoginUserViewController:UIViewController {
         return LB
         
     }()
+    
+    //MARK: - ACTION
+    @objc func handleLogin()
+    {
+        
+        AuthService.logUserIn(withEmail: emailField.text!, password: passwordField.text!) {(result , error) in
+            if let error = error {
+                print("Failed to login : \(error.localizedDescription)")
+            } else {
+                print("User Login successfully.")
+                // Handle successful registration here
+                self.delegate?.authenticationComplete()
+                self.dismiss(animated: true, completion: nil)
+                
+              
+            }
+        }
+    }
+    
     
     
     // MARK: - LIFECYCLE
@@ -98,6 +125,7 @@ class LoginUserViewController:UIViewController {
     @objc func handleShowSignUp()
     {
         let controller = SignUPViewcontroller()
+        controller.delegate = delegate
         navigationController?.pushViewController(controller, animated: true)
     }
     
