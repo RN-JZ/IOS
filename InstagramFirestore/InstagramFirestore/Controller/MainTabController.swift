@@ -2,7 +2,7 @@
 import UIKit
 import Firebase
 
-class FeedViewController:UITabBarController, AutheticationDelegate
+class MainTabController:UITabBarController, AutheticationDelegate
 {
     
 
@@ -74,15 +74,16 @@ class FeedViewController:UITabBarController, AutheticationDelegate
  
 }
 
-extension FeedViewController
+extension MainTabController
 {
 
     func style(withUser user:User)
     {
         // you need to pass layout in UICOLLECTIONVIEW()
         let layout = UICollectionViewFlowLayout()
-        let vc1 = SearchViewController(collectionViewLayout: layout)
-        let vc2 = MainTabViewControlller()
+        let vc1 = FeedViewControlller(collectionViewLayout: layout)
+        
+        let vc2 = SearchController()
         let vc3 = ImageSelectorViewController()
         let vc4 = NotificationViewController()
         let vc5 = ProfileViewController(user:user)

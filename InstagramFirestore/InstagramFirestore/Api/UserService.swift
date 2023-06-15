@@ -4,6 +4,7 @@
 
 
 import Firebase
+import FirebaseFirestore
 
 struct UserService
 {
@@ -26,6 +27,25 @@ struct UserService
             
             completion(user)
             
+        }
+    }
+    
+    static func fetchAllUser(completion: @escaping([User])->Void)
+    {
+       
+        var user:[User] = []
+        COLLECTION_USER.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                guard let querySnapshot = querySnapshot else {return}
+//                for document in querySnapshot!.documents {
+//                    let userData = document.data()
+//                    user.append(User(userData))
+//                }
+               user =  querySnapshot.documents.map({User($0.data())})
+                completion(user)
+            }
         }
     }
 }

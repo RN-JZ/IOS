@@ -1,105 +1,84 @@
 import UIKit
-import Firebase
+
 
 
 private let reuseIdentifier = "cell"
-
-class SearchViewController: UICollectionViewController
-{
+class SearchController: UITableViewController {
     
-    //var isExpanded = [Bool]()
-
-    // MARK: -  LIFECYCLE
+    let searchController = UISearchController()
+    
+    var user = [User]()
+    var filterData = [User]()
+    var inSearchMode:Bool
+    {
+        return searchController.isActive && !searchController.searchBar.text!.isEmpty
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-   
-        
+        style()
+        SearchUser()
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+       
     }
-    //MARK: - API
-    @objc func handleLogout()
+    
+    
+    func SearchUser()
     {
-        do{
-            print("DEBUG: in LOGOUT")
-            try Auth.auth().signOut()
-            let nav = UINavigationController(rootViewController: LoginUserViewController())
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav,animated: true , completion: nil)
+        UserService.fetchAllUser{user in
+            print("DEBUG GET THE USER")
+            self.user = user
+            self.tableView.reloadData()
+            
         }
-        catch
-        {
-            print("DEBUG: FAILED TO LOGOUT")
-        }
+       
     }
-    
-    // MARK: - HELPERS
-    
-    func setup()
-    {
-        //collectionView.backgroundColor = .white
-//
-//        for _ in 0..<2 {
-//            isExpanded.append(false)
-//        }
-        
-        collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain , target: self, action: #selector(handleLogout))
-    }
-    
+
+
 }
 
-
-// MARK: - UICOLLECTIONVIEWDataSource
-
-extension SearchViewController
+extension SearchController
 {
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return 2
+    func style()
+    {
+        view.backgroundColor = .blue
+        tableView.register(UserCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.rowHeight = 64
+    }
+}
+
+extension SearchController
+{
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return inSearchMode ?filterData.count:user.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:reuseIdentifier,for:indexPath)as! FeedCell
-        // cell.updatePostImage(isExpanded: isExpanded[indexPath.item])
-        // cell.backgroundColor = .red
-        
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! UserCell
+        let user = inSearchMode ?UserCellViewModel(filterData[indexPath.row]):UserCellViewModel(user[indexPath.row])
+        cell.viewModel = user
         return cell
     }
-    
-    // FOR COLLASPSE CELL
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//        print("Selected item is \(indexPath.item)")
-//        // Toggle the expanded state for the selected cell
-//           isExpanded[indexPath.item] = !isExpanded[indexPath.item]
-//        collectionView.reloadItems(at: [indexPath])
-//
-//
-//    }
-    
 }
 
-// MARK: -UICollectionViewDelegateFlowLayout
-
-extension SearchViewController:UICollectionViewDelegateFlowLayout
+extension SearchController : UISearchResultsUpdating
 {
-   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var height = view.frame.width + 8 + 50 + 8
-        height += 110
-       return CGSize(width: view.frame.width, height: height)
-    
-       
-       // FOR COLLASPSE CELL
-    
-//    if isExpanded[indexPath.item] {
-//           // Return the expanded size for the cell
-//           return CGSize(width: collectionView.bounds.width, height: 200)
-//       } else {
-//           // Return the collapsed size for the cell
-//                 return CGSize(width: view.frame.width, height: height)
-//       }
-   }
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let data = searchController.searchBar.text else
+        {
+            return ;
+        }
+        print(data)
+        
+        filterData = user.filter { $0.fullName.lowercased().contains(data.lowercased()) || $0.userName.lowercased().contains(data.lowercased())}
+        
+        
+        tableView.reloadData()
 
+    }
+    
+    
 }
+
 
 
