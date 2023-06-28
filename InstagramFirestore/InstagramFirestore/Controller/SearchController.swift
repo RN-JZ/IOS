@@ -59,6 +59,12 @@ extension SearchController
         cell.viewModel = user
         return cell
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let user = inSearchMode ?UserCellViewModel(filterData[indexPath.row]):UserCellViewModel(user[indexPath.row])
+        var controller = ProfileViewController(user: user)
+        navigationController?.pushViewController(contoller, animated: true)
+    }
 }
 
 extension SearchController : UISearchResultsUpdating
