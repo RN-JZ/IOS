@@ -8,17 +8,28 @@ class FeedViewControlller: UICollectionViewController
 {
     
     //var isExpanded = [Bool]()
+    private var posts = [Post]()
 
     // MARK: -  LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
+        self.collectionView.reloadData()
         setup()
+        FetchPost()
         
    
         
     }
     //MARK: - API
+    func FetchPost()
+    {
+        PostService.fecthPosts { data in
+            self.posts = data
+            self.collectionView.reloadData()
+            
+        }
+    }
     @objc func handleLogout()
     {
         do{
@@ -57,12 +68,13 @@ class FeedViewControlller: UICollectionViewController
 extension FeedViewControlller
 {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return 2
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:reuseIdentifier,for:indexPath)as! FeedCell
+        cell.viewModel = PostViewModel(post: posts[indexPath.row])
         // cell.updatePostImage(isExpanded: isExpanded[indexPath.item])
         // cell.backgroundColor = .red
         

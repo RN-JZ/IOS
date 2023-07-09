@@ -2,8 +2,15 @@
 import UIKit
 import SDWebImage
 
+protocol ProfileHeaderDelegate:class
+{
+    func header(_ profileHeader:ProfileHeader , didTabActionFor user:User)
+}
+
 class ProfileHeader:UICollectionReusableView
 {
+    // Delgate
+    weak var delegate : ProfileHeaderDelegate?
     
     //MARK: - VIEWMODEL
     var viewModel:ProfileHeaderViewModel?{
@@ -34,7 +41,7 @@ class ProfileHeader:UICollectionReusableView
     private lazy var editProfileFolloWbutton:UIButton =
     {
         let button = UIButton(type: .system)
-        button.setTitle("Edit Profile", for: .normal)
+        button.setTitle("Loading", for: .normal)
         button.layer.cornerRadius = 3
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 0.5
@@ -48,7 +55,7 @@ class ProfileHeader:UICollectionReusableView
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.attributedText =  attributedStatText(value: 6, label: "post")
+       // label.attributedText =  attributedStatText(value: 6, label: "post")
         return label
     }()
     private lazy var followerLabel:UILabel =
@@ -56,7 +63,7 @@ class ProfileHeader:UICollectionReusableView
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.attributedText =  attributedStatText(value: 6, label: "follower")
+        //label.attributedText =  attributedStatText(value: 6, label: "follower")
         return label
     }()
     private lazy var followingLabel:UILabel =
@@ -64,7 +71,7 @@ class ProfileHeader:UICollectionReusableView
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.attributedText =  attributedStatText(value: 6, label: "following")
+        //label.attributedText =  attributedStatText(value: 6, label: "following")
         return label
     }()
     
@@ -112,9 +119,11 @@ class ProfileHeader:UICollectionReusableView
     required init?(coder: NSCoder) {
         fatalError("SOMETHING WENT WRONG WITH VIEWS")
     }
-    
+    // MARK: - Action
     @objc func handleEditProfileTabped()
-    {
+    { 
+        guard let user = viewModel?.user else {return }
+        delegate?.header(self, didTabActionFor: user)
         
     }
 }
@@ -177,20 +186,21 @@ extension ProfileHeader
     
     // MARK: HELPER
     
-    func attributedStatText(value:Int , label:String)->NSAttributedString
-    {
-        let attrText = NSMutableAttributedString(string: "\(value)\n", attributes: [.font:UIFont.boldSystemFont(ofSize: 14)])
-        attrText.append(NSAttributedString(string: label, attributes: [.font:UIFont.systemFont(ofSize: 14) , .foregroundColor:UIColor.lightGray]))
-        return attrText
-    }
+   
     
     func configure()
     {
         print("DEGUG: I AM IN CONFIGURE")
         guard let viewModel = self.viewModel else {return}
         nameLabel.text = viewModel.fullName
+        editProfileFolloWbutton.setTitle(viewModel.FollowedButtonText, for: .normal)
+        editProfileFolloWbutton.backgroundColor = viewModel.followButtonBackgroundColor
+        editProfileFolloWbutton.setTitleColor(viewModel.followButtonTextColor, for: .normal)
         postImageView.sd_setImage(with: viewModel.profileImage)
-    }
+        followerLabel.attributedText =  viewModel.numberOfFollowers
+        followingLabel.attributedText = viewModel.numberOfFollowing
+        postLabel.attributedText = viewModel.numberOfPosts
+}
 }
 
 

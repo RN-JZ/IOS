@@ -19,14 +19,33 @@ class ProfileViewController: UICollectionViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setup()
+        checkIfUserISFollowed()
+        fetchUserStats()
+        
         
        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("DEBUG: Life cycle")
-       
+  
+    // MARK: - API
+     func checkIfUserISFollowed()
+    {
+        print("DEBUG \(user.uid)")
+        UserService.checkifUserisFollowed(uid: user.uid) { check in
+            self.user.isFollowed = check
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func fetchUserStats()
+    {
+        UserService.fetchUserStats(uid: user.uid) { UserStats in
+            self.user.stats = UserStats
+            self.collectionView.reloadData()
+            
+            print("DEBUG \(UserStats)")
+        }
     }
    
    
@@ -66,6 +85,7 @@ extension ProfileViewController
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
+        headerView.delegate = self
        
         headerView.viewModel = ProfileHeaderViewModel(self.user)
         return headerView
@@ -91,6 +111,34 @@ extension ProfileViewController:UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
     }
+}
+
+extension ProfileViewController:ProfileHeaderDelegate
+{
+    func header(_ profileHeader: ProfileHeader, didTabActionFor user: User) {
+        if user.currentUser
+        {
+            print("EDIT BUTTON")
+        }
+        else if user.isFollowed
+        {
+            UserService.unfollow(uid: user.uid) { error in
+                self.user.isFollowed = false
+                self.collectionView.reloadData()
+            }
+        }
+        else{
+            UserService.follow(uid: user.uid)
+            {
+                error in
+                print("BUTTON \(error)")
+                self.user.isFollowed = true
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    
 }
 
 

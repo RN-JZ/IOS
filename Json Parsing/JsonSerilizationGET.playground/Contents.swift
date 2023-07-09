@@ -6,11 +6,11 @@ PlaygroundPage.current.needsIndefiniteExecution = true // KEEP CODE RUNNING UNTI
 
 //If you want to parse JSON by hand rather than using Codable,
 //iOS has a built-in alternative called JSONSerialization and
-//it can convert a JSON string into a collection of dictionaries,
+//it provide JSON OBJECT which we can convert into  collection of dictionaries,
 //arrays, strings and numbers in just a few lines of code.
 
 
-// WE USE JSON SERILZATION WHEN WE NEED TO SEND DATA TO SERVER OR RECEIVER DATA FROM SERVER IN JASON FORMATE YOU CAN USE IT
+// WE USE JSON SERILZATION WHEN WE NEED TO SEND DATA TO SERVER OR RECEIVER DATA FROM SERVER IN JSON FORMATE YOU CAN USE IT
 
 
 func getData()

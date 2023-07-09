@@ -239,27 +239,34 @@ class Unicycle:Vehicle
 protocol Account {
  var value: Double { get set }
  init(initialAmount: Double)
- init?(transferAccount: Account)  // FAILABLE INTILIZER
+ init?(transferAccount: Account)  // FAILABLE INTILIZER or optional init
 }
+
 //In the Account protocol above, you define two initializers as part of the protocol.
 //This behaves much as you might expect, in that any type that conforms to Account
 //is required to have these initializer.
 //Although enforcing initializers in protocols can be useful, they also let you create an
 //instance of a type that conforms to that protocol:
 class BitcoinAccount: Account {
+
+    
  var value: Double
  required init(initialAmount: Double) {
  value = initialAmount
  }
- required init?(transferAccount: Account) {
- guard transferAccount.value > 0.0 else {
- return nil
- }
- value = transferAccount.value
- }
+    
+     required init?(transferAccount: Account) {
+     guard transferAccount.value > 0.0 else {
+     return nil
+     }
+     value = transferAccount.value
+     }
+
 }
 var accountType: Account.Type = BitcoinAccount.self
 let account = accountType.init(initialAmount: 30.00)
+
+BitcoinAccount(initialAmount: 30.0)
 
 
 //SEE THIS WHEN YOU NEED IN FUTURE

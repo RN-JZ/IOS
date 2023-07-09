@@ -4,7 +4,8 @@ import UIKit
 class FeedCell:UICollectionViewCell
 {
     //MARK: - Property
-    var stackView = UIStackView()
+    private let cache   = NSCache<AnyObject,UIImage>()
+    var stackView       = UIStackView()
     private let profileImageView:UIImageView =
     {
         let iv = UIImageView()
@@ -15,6 +16,13 @@ class FeedCell:UICollectionViewCell
         return iv
         
     }()
+    
+    var viewModel:PostViewModel?{
+        didSet
+        {
+            configure()
+        }
+    }
     
     private lazy var  userNameButton:UIButton =
     {
@@ -131,7 +139,7 @@ extension FeedCell
         
         captionLabel.anchor(top: likeLabel.bottomAnchor, left:leftAnchor,paddingTop: 8, paddingLeft: 8)
         
-       postTimeLabel.anchor(top: captionLabel.bottomAnchor, left:leftAnchor,paddingTop: 8, paddingLeft: 8)
+        postTimeLabel.anchor(top: captionLabel.bottomAnchor, left:leftAnchor,paddingTop: 8, paddingLeft: 8)
         
 
 
@@ -167,4 +175,56 @@ extension FeedCell
         
         
     }
+    
+    func configure()
+    {
+        print("DEGUG: I AM IN CONFIGURE")
+        guard let viewModel = self.viewModel else {return}
+        captionLabel.text = viewModel.caption
+//        guard let url =  viewModel.imageURL else {return}
+//        //downloadImage(image:url)
+         postlmageView.sd_setImage(with: viewModel.imageURL)
+    }
+    
+    
+    
+    
+    // I MAKE THIS TO SEE TO TO DOWNLOAD IMAGE AND HOW TO USE NS CACHE
+    
+//    func downloadImage(image:URL)
+//    {
+//
+//        let key = image as AnyObject
+//        if let image =  cache.object(forKey: key)
+//        {
+//            print("IN CACHE :)")
+//            self.postlmageView.image = image
+//            return
+//        }
+//        let task = URLSession.shared.dataTask(with: image)
+//        {   [weak self]
+//            data, response, error in
+//
+//            guard let self = self else {
+//                print("FAIL TO LOAD IMAGE")
+//                return}
+//            if error != nil { print("FAIL TO LOAD IMAGE")
+//                return
+//
+//            }
+//            guard let response = response as? HTTPURLResponse , response.statusCode == 200 else {return}
+//            guard let data = data else {print("FAIL TO LOAD IMAGE")
+//                return
+//
+//            }
+//
+//            guard  let image = UIImage(data: data) else {return}
+//            self.cache.setObject(image, forKey: (key))
+//
+//            DispatchQueue.main.async {
+//                self.postlmageView.image = image
+//            }
+//
+//        }.resume()
+//    }
 }
