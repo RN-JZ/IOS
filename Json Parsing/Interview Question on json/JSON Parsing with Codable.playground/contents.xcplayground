@@ -9,5 +9,7 @@
         <page name='Custom CodingKeys'/>
         <page name='JSON From API'/>
         <page name='Encoding Data'/>
+        <page name='URL PARSING'/>
+        <page name='Single responsibility principle'/>
     </pages>
 </playground>
