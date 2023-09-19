@@ -24,11 +24,13 @@ If your classes or structures use differnt property names than what the feed con
 //}
 
 import UIKit
-struct ColorPalette: Codable {
+struct ColorPalette: Codable
+{
     let paletteName, paletteInfo: String
     let paletteColors: [PaletteColor]
 
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey
+    {
         case paletteName = "palette_name"
         case paletteInfo = "palette_info"
         case paletteColors = "palette_colors"

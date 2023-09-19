@@ -10,7 +10,8 @@ struct ColorPalette: Codable {
     let paletteName, paletteInfo: String
     let paletteColors: [PaletteColor]
 
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey
+    {
         case paletteName = "palette_name"
         case paletteInfo = "palette_info"
         case paletteColors = "palette_colors"
